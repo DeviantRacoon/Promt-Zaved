@@ -1,0 +1,50 @@
+.icon-btn {
+  position: relative;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+}
+.icon-btn i {
+  pointer-events: none;
+}
+.icon-btn::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+  opacity: 0.2;
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease, opacity 0.8s;
+}
+.icon-btn:active::after {
+  width: 200%;
+  height: 200%;
+  opacity: 0;
+  transition: 0s;
+}
+
+.toast-android {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #323232;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  animation: fadein 0.3s, fadeout 0.3s 1.7s;
+  pointer-events: none;
+  z-index: 1055;
+}
+@keyframes fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes fadeout {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
