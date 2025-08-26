@@ -1,16 +1,16 @@
-import { signInWithEmailAndPassword, signOut, GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
+import { signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithCredential } from 'firebase/auth';
 import { useState } from 'preact/hooks';
 import { route } from 'preact-router';
 
-import { auth } from '../../config/firebase';
+import { auth } from '../../lib/firebase/auth';
+import { firefoxGoogleOIDC } from '../../lib/ffx-identity';
 
 import { type LoginForm } from '../../common/interfaces/auth';
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function useAuth() {
-  const authContext = getAuth();
-  const provider = new GoogleAuthProvider();
+  const authContext = auth;
 
   const [loginForm, setLoginForm] = useState<LoginForm>({ email: '', password: '' });
   const [loginStep, setLoginStep] = useState<0 | 1>(0);
@@ -41,25 +41,14 @@ export function useAuth() {
 
   async function signInWithGoogle() {
     try {
-      const result = await signInWithPopup(authContext, provider);
-
-      const user = result.user;
-      console.log("¡Usuario ha iniciado sesión con Google!", user.displayName || user.email);
-
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      if (credential) {
-        const accessToken = credential.accessToken;
-        console.log("Token de acceso de Google:", accessToken);
-      }
-
+      const { idToken } = await firefoxGoogleOIDC();
+      const credential = GoogleAuthProvider.credential(idToken);
+      await signInWithCredential(authContext, credential);
       route('/dashboard');
     } catch (error: any) {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.error("Error al iniciar sesión con Google:", errorCode, errorMessage);
-
-      // const email = error.customData?.email;
-      // const credential = GoogleAuthProvider.credentialFromError(error);
     }
   }
 
