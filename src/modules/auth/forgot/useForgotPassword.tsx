@@ -1,7 +1,7 @@
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { useState } from 'preact/hooks';
 
-import { auth } from '../../../config/firebase';
+import { auth } from '../../../lib/firebase';
 
 import { type ForgotForm } from '../../../common/interfaces/auth';
 

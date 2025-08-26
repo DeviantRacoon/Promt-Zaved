@@ -1,8 +1,8 @@
-import { createUserWithEmailAndPassword, updateProfile, getAuth } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { useState } from 'preact/hooks';
 import { route } from 'preact-router';
 
-import { auth } from '../../../config/firebase';
+import { auth } from '../../../lib/firebase';
 
 import { type RegisterForm } from '../../../common/interfaces/auth';
 
@@ -73,7 +73,7 @@ export function useRegister() {
 
   const updateUser = async (displayName: string) => {
     try {
-      await updateProfile(getAuth().currentUser!, { displayName });
+      await updateProfile(auth.currentUser!, { displayName });
     } catch (error) {
       console.error(error);
     }

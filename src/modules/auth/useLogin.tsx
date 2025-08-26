@@ -1,15 +1,14 @@
-import { signInWithEmailAndPassword, signOut, GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
+import { signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useState } from 'preact/hooks';
 import { route } from 'preact-router';
 
-import { auth } from '../../config/firebase';
+import { auth } from '../../lib/firebase';
 
 import { type LoginForm } from '../../common/interfaces/auth';
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function useAuth() {
-  const authContext = getAuth();
   const provider = new GoogleAuthProvider();
 
   const [loginForm, setLoginForm] = useState<LoginForm>({ email: '', password: '' });
@@ -41,7 +40,7 @@ export function useAuth() {
 
   async function signInWithGoogle() {
     try {
-      const result = await signInWithPopup(authContext, provider);
+      const result = await signInWithPopup(auth, provider);
 
       const user = result.user;
       console.log("¡Usuario ha iniciado sesión con Google!", user.displayName || user.email);

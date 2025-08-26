@@ -1,5 +1,4 @@
 import { useCallback, useState, useEffect } from 'preact/hooks';
-import { getAuth } from 'firebase/auth';
 import { buildCopyPrompt } from '../../common/libs/buildCopyPrompt';
 import { autofillChatGPT } from './autofill-chatgpt';
 
@@ -15,8 +14,8 @@ import {
   where,
   getDocs,
   orderBy,
-} from "firebase/firestore";
-import { db } from '../../config/firebase';
+} from 'firebase/firestore';
+import { auth, db } from '../../lib/firebase';
 
 function showToast(message: string) {
   const toast = document.createElement('div');
@@ -35,10 +34,10 @@ export function usePrompt() {
 
   useEffect(() => {
     getPromptsFromDB();
-  }, [getAuth().currentUser]);
+  }, [auth.currentUser]);
 
   const getPromptsFromDB = useCallback(async () => {
-    const userId = getAuth().currentUser?.uid;
+    const userId = auth.currentUser?.uid;
 
     if (!userId) {
       return [];
@@ -68,7 +67,7 @@ export function usePrompt() {
   }, []);
 
   const createPrompt = useCallback(async (data: Omit<Prompt, 'id' | 'createdAt' | 'updatedAt' | 'userId'>) => {
-    const userId = getAuth().currentUser?.uid;
+    const userId = auth.currentUser?.uid;
 
     if (!userId) {
       console.error("No user logged in");
