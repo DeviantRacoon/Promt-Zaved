@@ -17,6 +17,9 @@
     "48": "logo.svg",
     "96": "logo.svg"
   },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' https://apis.google.com; object-src 'self'"
+  },
   "browser_specific_settings": {
     "gecko": {
       "id": "hello-auth@example.com",
