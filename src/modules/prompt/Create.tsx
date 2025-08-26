@@ -7,6 +7,7 @@ import Section from '../../common/components/Section';
 
 import { CATEGORIES, TYPES } from '../../common/libs/constant';
 import { usePrompt } from './usePrompt';
+import { useAuthState } from "../../hooks/useAuthState";
 
 import type { PromptForm } from '../../common/interfaces/prompt';
 
@@ -18,6 +19,7 @@ const TAGS_MAX = 240;       // opcional
 
 export default function CreatePrompt(props: RoutableProps & { id?: string }) {
   const { id } = props as { id?: string };
+  const { user, loading: authLoading } = useAuthState();
   const { createPrompt, updatePrompt, getPrompt, deletePrompt } = usePrompt();
 
   const [form, setForm] = useState<PromptForm>({
@@ -47,6 +49,10 @@ export default function CreatePrompt(props: RoutableProps & { id?: string }) {
       }
     }
   }, [id, getPrompt]);
+
+  useEffect(() => {
+    if (!authLoading && !user) route('/');
+  }, [authLoading, user]);
 
   // atajo: Ctrl/Cmd+S para enviar
   useEffect(() => {
@@ -145,8 +151,20 @@ export default function CreatePrompt(props: RoutableProps & { id?: string }) {
     [form.tags]
   );
 
+  if (authLoading) {
+    return (
+      <Section className="card-body" path={props.path} aria-busy="true">
+        <div className="d-flex justify-content-center align-items-center h-100">
+          <span>Cargando...</span>
+        </div>
+      </Section>
+    );
+  }
+
+  if (!user) return null;
+
   return (
-    <Section className="card-body" aria-labelledby="create-prompt-title">
+    <Section className="card-body" path={props.path} aria-labelledby="create-prompt-title">
       <Layout>
         {/* Contenedor lineal (una columna) pensando en popup de extensión */}
         <div class="container-fluid px-0">

@@ -1,20 +1,30 @@
-import { getAuth } from 'firebase/auth';
 import { useEffect } from 'preact/hooks';
 import { route } from 'preact-router';
 
 import { useAuth } from './useLogin';
 import Section from '../../common/components/Section';
+import { useAuthState } from '../../hooks/useAuthState';
 
 export default function Login({ path }: { path: string }) {
+  const { user, loading: authLoading } = useAuthState();
   const { loading, change, submit, form, setStep, step, signInWithGoogle } = useAuth();
 
   useEffect(() => {
-    const user = getAuth().currentUser;
-    if (user) route('/dashboard');
-  }, []);
+    if (!authLoading && user) route('/dashboard');
+  }, [authLoading, user]);
 
   const isEmailStep = step === 0;
   const isPasswordStep = step === 1;
+
+  if (authLoading) {
+    return (
+      <Section className="card-body" path={path} aria-busy="true">
+        <div className="d-flex justify-content-center align-items-center h-100">
+          <span>Cargando...</span>
+        </div>
+      </Section>
+    );
+  }
 
   return (
     <Section className="card-body" path={path}>

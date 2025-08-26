@@ -7,10 +7,12 @@ import Layout from "./_layout";
 
 import { usePromptList } from './hooks/usePromptList';
 import { usePrompt } from "./usePrompt";
+import { useAuthState } from "../../hooks/useAuthState";
 
 import type { Prompt } from "../../common/interfaces/prompt";
 
 export default function Prompt({ path }: { path: string }) {
+  const { user, loading: authLoading } = useAuthState();
   const { prompts, copyPrompt, autofillPrompt } = usePrompt();
   
   const {
@@ -52,6 +54,22 @@ export default function Prompt({ path }: { path: string }) {
   useEffect(() => {
     setPage(1);
   }, [search, typeFilter, categoryFilter]);
+
+  useEffect(() => {
+    if (!authLoading && !user) route('/');
+  }, [authLoading, user]);
+
+  if (authLoading) {
+    return (
+      <Section className="card-body" path={path} aria-busy="true">
+        <div className="d-flex justify-content-center align-items-center h-100">
+          <span>Cargando...</span>
+        </div>
+      </Section>
+    );
+  }
+
+  if (!user) return null;
 
   return (
     <Section className="card-body" path={path}>
