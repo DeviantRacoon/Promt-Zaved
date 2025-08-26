@@ -64,7 +64,13 @@ export function useAuth() {
   }
 
   const logout = () => {
-    signOut(auth);
+    signOut(auth).finally(() => {
+      try {
+        localStorage.removeItem('prompts');
+      } catch {
+        /* ignore storage errors */
+      }
+    });
   };
 
   return {

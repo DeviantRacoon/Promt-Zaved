@@ -31,11 +31,20 @@ function showToast(message: string) {
 }
 
 export function usePrompt() {
-  const [prompts, setPrompts] = useState<Prompt[]>([]);
+  const [prompts, setPrompts] = useState<Prompt[]>(() => {
+    try {
+      const stored = localStorage.getItem('prompts');
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
+  });
 
   useEffect(() => {
-    getPromptsFromDB();
-  }, [getAuth().currentUser]);
+    if (prompts.length === 0) {
+      getPromptsFromDB();
+    }
+  }, [getAuth().currentUser, prompts.length]);
 
   const getPromptsFromDB = useCallback(async () => {
     const userId = getAuth().currentUser?.uid;
@@ -60,6 +69,11 @@ export function usePrompt() {
       });
 
       setPrompts(userPrompts);
+      try {
+        localStorage.setItem('prompts', JSON.stringify(userPrompts));
+      } catch {
+        /* ignore storage errors */
+      }
     } catch (e) {
       showToast('Error al obtener los prompts');
       console.error("Error getting documents: ", e);
@@ -83,12 +97,12 @@ export function usePrompt() {
         updatedAt: serverTimestamp(),
       });
       showToast('Prompt guardado');
-
+      await getPromptsFromDB();
     } catch (error) {
       showToast('Error al crear el prompt');
       console.error("Error adding document: ", error);
     }
-  }, [prompts, setPrompts]);
+  }, [getPromptsFromDB]);
 
   const updatePrompt = useCallback(async (id: string, data: Omit<Prompt, 'id' | 'createdAt' | 'updatedAt' | 'userId'>) => {
     const promptIndex = prompts.findIndex(p => p.id === id);
@@ -106,12 +120,13 @@ export function usePrompt() {
       });
 
       showToast('Prompt actualizado');
+      await getPromptsFromDB();
     } catch (error) {
       showToast('Error al actualizar el prompt');
       console.error("Error updating document: ", error);
       return;
     }
-  }, [prompts, setPrompts]);
+  }, [getPromptsFromDB, prompts]);
 
   const getPrompt = useCallback((id: string) => prompts.find(p => p.id === id), [prompts]);
 
@@ -141,12 +156,13 @@ export function usePrompt() {
       await deleteDoc(promptRef);
 
       showToast('Prompt eliminado');
+      await getPromptsFromDB();
     } catch (error) {
       showToast('Error al eliminar el prompt');
       console.error("Error updating document: ", error);
       return;
     }
-  }, [prompts, setPrompts]);
+  }, [getPromptsFromDB, prompts]);
 
   return { prompts, createPrompt, updatePrompt, getPrompt, copyPrompt, autofillPrompt, deletePrompt };
 }
