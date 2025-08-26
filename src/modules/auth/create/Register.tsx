@@ -1,6 +1,6 @@
-import { getAuth } from 'firebase/auth';
 import { useState, useEffect } from 'preact/hooks';
 import { route } from 'preact-router';
+import { auth } from '../../../lib/firebase';
 
 import { useRegister } from './useRegister';
 
@@ -12,8 +12,8 @@ export default function Register(_props: RoutableProps) {
   const { submit, loading, form, touched, change, blur, valid, formValid } = useRegister();
 
   useEffect(() => {
-    if (getAuth().currentUser) route('/dashboard');
-  }, [getAuth().currentUser]);
+    if (auth.currentUser) route('/dashboard');
+  }, [auth.currentUser]);
 
   const [showPwd] = useState(false);
   const [showPwd2] = useState(false);

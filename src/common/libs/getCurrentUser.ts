@@ -1,8 +1,8 @@
-import { getAuth } from 'firebase/auth';
+import { auth } from '../../lib/firebase';
 
 export function getCurrentUser() {
   try {
-    return getAuth().currentUser;
+    return auth.currentUser;
   } catch {
     return null;
   }

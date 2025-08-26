@@ -1,6 +1,6 @@
-import { getAuth } from 'firebase/auth';
 import { useEffect } from 'preact/hooks';
 import { route } from 'preact-router';
+import { auth } from '../../lib/firebase';
 
 import { useAuth } from './useLogin';
 import Section from '../../common/components/Section';
@@ -9,7 +9,7 @@ export default function Login({ path }: { path: string }) {
   const { loading, change, submit, form, setStep, step, signInWithGoogle } = useAuth();
 
   useEffect(() => {
-    const user = getAuth().currentUser;
+    const user = auth.currentUser;
     if (user) route('/dashboard');
   }, []);
 

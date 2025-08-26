@@ -1,6 +1,6 @@
-import { getAuth } from 'firebase/auth';
 import { route } from 'preact-router';
 import { useMemo } from 'preact/hooks';
+import { auth } from '../../lib/firebase';
 
 import PromptFilters from './components/PromptFilters';
 import type { LayoutProps } from '../../common/interfaces/prompt';
@@ -25,7 +25,7 @@ export default function Layout({
   categoryFilter = '',
   onCategoryFilter = () => {},
 }: LayoutProps) {
-  const user = getAuth().currentUser;
+  const user = auth.currentUser;
   const pathname = location.pathname; // si prefieres, centraliza en un hook/router store
 
   const isDashboard = pathname === '/dashboard';
