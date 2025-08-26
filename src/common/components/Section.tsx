@@ -1,3 +1,4 @@
+
 import type { SectionProps } from '../interfaces/section';
 
 export default function Section({

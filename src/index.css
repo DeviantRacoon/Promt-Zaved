@@ -1,50 +1,577 @@
+/* ================================
+   DARK THEME — TOKENS DE COLOR
+   ================================ */
+
+/* Si usas BS 5.3+ con theming por atributo */
+:root,
+:root[data-bs-theme="dark"] {
+  /* Paleta base (inspiración neutral azulada) */
+  --brand-50:  #e8f0ff;
+  --brand-100: #cfe0ff;
+  --brand-200: #a9c3ff;
+  --brand-300: #7ea3ff;
+  --brand-400: #5a89ff;
+  --brand-500: #3d74ff;
+  --brand-600: #2d5ee6;
+  --brand-700: #2448b8;
+  --brand-800: #1d388f;
+  --brand-900: #152863;
+
+  --surface-0:  #0d1117;  /* body bg */
+  --surface-1:  #11161d;  /* cards */
+  --surface-2:  #161c23;  /* deeper surfaces */
+  --surface-3:  #1b222b;  /* modals/menus */
+  --surface-4:  #202835;  /* accents */
+  --outline-1:  #2a3543;  /* borders sutiles */
+  --outline-2:  #364254;  /* borders fuertes */
+
+  --text-high:   #f2f5f9; /* títulos/primario */
+  --text-med:    #c9d1d9; /* texto normal */
+  --text-low:    #9aa7b1; /* muted */
+  --text-inv:    #0b0e11; /* texto sobre chips claros */
+
+  --accent:      var(--brand-500);
+  --accent-hover:var(--brand-600);
+  --accent-active:var(--brand-700);
+
+  /* Éxito/Advertencia/Error (oscuros moderados) */
+  --green-500: #22c55e;
+  --green-600: #16a34a;
+  --amber-500: #f59e0b;
+  --amber-600: #d97706;
+  --red-500:   #ef4444;
+  --red-600:   #dc2626;
+
+  /* Sombra/elevación */
+  --shadow-color: 0 10px 30px rgba(0,0,0,.35), 0 2px 8px rgba(0,0,0,.25);
+
+  /* Radios y gaps */
+  --radius-xs: .375rem;  /* 6px */
+  --radius-sm: .5rem;    /* 8px */
+  --radius-md: .75rem;   /* 12px */
+  --radius-lg: 1rem;     /* 16px */
+
+  /* Transiciones globales coherentes */
+  --easing: cubic-bezier(.2,.7,.2,1);
+  --t-fast: 120ms;
+  --t-med:  200ms;
+  --t-slow: 320ms;
+
+  /* ================================
+     OVERRIDES VARIABLES BOOTSTRAP
+     ================================ */
+
+  /* Body */
+  --bs-body-bg:            var(--surface-0);
+  --bs-body-color:         var(--text-med);
+  --bs-body-color-rgb:     201, 209, 217;
+
+  /* Tipografía */
+  --bs-link-color:         var(--accent);
+  --bs-link-hover-color:   var(--accent-hover);
+
+  /* Bordes y separadores */
+  --bs-border-color:       var(--outline-1);
+  --bs-border-color-translucent: rgba(255,255,255,.08);
+
+  /* Botones */
+  --bs-btn-border-radius:  var(--radius-sm);
+  --bs-btn-padding-y:      .45rem;
+  --bs-btn-padding-x:      .8rem;
+
+  /* Primary */
+  --bs-primary:            var(--accent);
+  --bs-primary-rgb:        61, 116, 255;
+  --bs-primary-text-emphasis: var(--brand-100);
+  --bs-primary-bg-subtle:  rgba(61,116,255,.12);
+  --bs-primary-border-subtle: rgba(61,116,255,.35);
+
+  /* Success/Warning/Danger */
+  --bs-success:            var(--green-500);
+  --bs-success-bg-subtle:  rgba(34,197,94,.12);
+  --bs-success-border-subtle: rgba(34,197,94,.35);
+
+  --bs-warning:            var(--amber-500);
+  --bs-warning-bg-subtle:  rgba(245,158,11,.12);
+  --bs-warning-border-subtle: rgba(245,158,11,.35);
+
+  --bs-danger:             var(--red-500);
+  --bs-danger-bg-subtle:   rgba(239,68,68,.12);
+  --bs-danger-border-subtle: rgba(239,68,68,.35);
+
+  /* Campos/form */
+  --bs-form-control-bg:        var(--surface-2);
+  --bs-form-control-color:     var(--text-med);
+  --bs-form-control-border-color: var(--outline-1);
+  --bs-form-control-focus-border-color: var(--accent);
+  --bs-form-control-focus-box-shadow: 0 0 0 .2rem rgba(61,116,255,.2);
+
+  /* Cards/List-Group */
+  --bs-card-bg:            var(--surface-1);
+  --bs-card-border-color:  var(--outline-1);
+  --bs-card-border-radius: var(--radius-md);
+
+  --bs-list-group-bg:         var(--surface-1);
+  --bs-list-group-color:      var(--text-med);
+  --bs-list-group-border-color: var(--outline-1);
+  --bs-list-group-action-hover-color: var(--text-high);
+  --bs-list-group-hover-bg:   rgba(255,255,255,.04);
+  --bs-list-group-action-active-bg: rgba(255,255,255,.06);
+
+  /* Dropdowns/Menus */
+  --bs-dropdown-bg:        var(--surface-3);
+  --bs-dropdown-link-color: var(--text-med);
+  --bs-dropdown-link-hover-color: var(--text-high);
+  --bs-dropdown-link-hover-bg: rgba(255,255,255,.05);
+  --bs-dropdown-border-color: var(--outline-2);
+
+  /* Modals */
+  --bs-modal-bg:           var(--surface-3);
+  --bs-modal-border-color: var(--outline-2);
+  --bs-modal-header-border-color: var(--outline-1);
+  --bs-modal-footer-border-color: var(--outline-1);
+
+  /* Tooltips/Popovers */
+  --bs-tooltip-bg:         var(--surface-4);
+  --bs-tooltip-color:      var(--text-med);
+  --bs-popover-bg:         var(--surface-3);
+  --bs-popover-border-color: var(--outline-2);
+
+  /* Pagination */
+  --bs-pagination-bg:           transparent;
+  --bs-pagination-border-color: var(--outline-1);
+  --bs-pagination-hover-bg:     rgba(255,255,255,.05);
+  --bs-pagination-hover-border-color: var(--outline-2);
+  --bs-pagination-active-bg:    var(--accent);
+  --bs-pagination-active-border-color: var(--accent);
+  --bs-pagination-color:        var(--text-med);
+
+  /* Badges/Chips */
+  --chip-bg: rgba(255,255,255,.06);
+  --chip-border: rgba(255,255,255,.12);
+  --chip-text: var(--text-med);
+}
+
+/* =====================================
+   BASE: Tipografía, links, selección
+   ===================================== */
+
+html, body {
+  background: var(--surface-0);
+  color: var(--text-med);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(61,116,255,.35);
+  color: var(--text-high);
+}
+
+/* Enlaces: micro animación y subrayado sutil al hover */
+a {
+  text-decoration: none;
+  transition: color var(--t-med) var(--easing), text-decoration-color var(--t-med) var(--easing);
+}
+a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+  text-decoration-color: rgba(255,255,255,.25);
+}
+
+/* =====================================
+   ELEVACIÓN, RADIOS, BORDES
+   ===================================== */
+
+.card, .dropdown-menu, .modal-content, .offcanvas, .toast {
+  border-radius: var(--radius-md) !important;
+  border-color: var(--outline-1) !important;
+  box-shadow: var(--shadow-color);
+  backdrop-filter: saturate(110%) blur(4px);
+}
+
+/* Superficies sutiles */
+.bg-surface-1 { background-color: var(--surface-1) !important; }
+.bg-surface-2 { background-color: var(--surface-2) !important; }
+.bg-surface-3 { background-color: var(--surface-3) !important; }
+
+/* Separadores más finos en dark */
+hr, .dropdown-divider {
+  border-top-color: rgba(255,255,255,.08);
+}
+
+/* =====================================
+   BOTONES — coherencia visual
+   ===================================== */
+
+.btn {
+  border-radius: var(--radius-sm);
+  transition: background-color var(--t-med) var(--easing), border-color var(--t-med) var(--easing), color var(--t-med) var(--easing), transform var(--t-fast) var(--easing), box-shadow var(--t-med) var(--easing);
+}
+
+.btn:active { transform: translateY(0.5px) scale(.99); }
+
+.btn-primary {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.btn-primary:hover { background-color: var(--accent-hover); border-color: var(--accent-hover); }
+.btn-primary:active, .btn-primary:focus { background-color: var(--accent-active); border-color: var(--accent-active); }
+
+.btn-outline-secondary {
+  color: var(--text-med);
+  border-color: var(--outline-1);
+  background-color: transparent;
+}
+.btn-outline-secondary:hover {
+  color: var(--text-high);
+  background-color: rgba(255,255,255,.05);
+  border-color: var(--outline-2);
+}
+
+/* Icon-only botón táctil (tu clase extendida) */
 .icon-btn {
   position: relative;
   overflow: hidden;
   border: none;
   background: transparent;
+  display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; padding:0;
+  color: var(--text-med);
+  border-radius: 999px;
+  transition: background-color var(--t-med) var(--easing), transform var(--t-fast) var(--easing), color var(--t-med) var(--easing);
 }
-.icon-btn i {
-  pointer-events: none;
-}
+.icon-btn:hover { background-color: rgba(255,255,255,.06); color: var(--text-high); }
+.icon-btn:active { transform: scale(.98); }
+.icon-btn i { pointer-events: none; }
+
+/* Ripple oscuro */
 .icon-btn::after {
   content: "";
   position: absolute;
   background: currentColor;
-  opacity: 0.2;
+  opacity: .2;
   border-radius: 50%;
-  width: 0;
-  height: 0;
-  top: 50%;
-  left: 50%;
+  width: 0; height: 0;
+  top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  transition: width 0.3s ease, height 0.3s ease, opacity 0.8s;
+  transition: width .3s var(--easing), height .3s var(--easing), opacity .8s var(--easing);
 }
-.icon-btn:active::after {
-  width: 200%;
-  height: 200%;
-  opacity: 0;
-  transition: 0s;
+.icon-btn:active::after { width: 200%; height: 200%; opacity: 0; transition: 0s; }
+
+/* Estados semánticos */
+.btn-success    { background: var(--green-500); border-color: var(--green-500); color:#08120b; }
+.btn-success:hover { background: var(--green-600); border-color: var(--green-600); color:#071008; }
+
+.btn-warning    { background: var(--amber-500); border-color: var(--amber-500); color:#140b00; }
+.btn-warning:hover { background: var(--amber-600); border-color: var(--amber-600); color:#140b00; }
+
+.btn-danger     { background: var(--red-500); border-color: var(--red-500); color:#170606; }
+.btn-danger:hover  { background: var(--red-600); border-color: var(--red-600); color:#170606; }
+
+/* =====================================
+   FOCUS VISIBLE ACCESIBLE (AA)
+   ===================================== */
+
+:focus-visible {
+  outline: 3px solid rgba(61,116,255,.9);
+  outline-offset: 2px;
 }
 
+/* anula box-shadows agresivos de BS en focus si molestan */
+.form-control:focus, .btn:focus, .page-link:focus, .dropdown-item:focus {
+  box-shadow: 0 0 0 .2rem rgba(61,116,255,.25) !important;
+}
+
+/* =====================================
+   FORM CONTROLS — dark, flotantes y estados
+   ===================================== */
+
+.form-control, .form-select, .form-floating > .form-control, .form-floating > .form-select {
+  background-color: var(--bs-form-control-bg);
+  color: var(--bs-form-control-color);
+  border-color: var(--bs-form-control-border-color);
+  border-radius: var(--radius-sm);
+}
+.form-control::placeholder { color: var(--text-low); opacity: .8; }
+
+.form-floating > label {
+  color: var(--text-low);
+}
+.form-floating > .form-control:not(:placeholder-shown) ~ label,
+.form-floating > .form-select ~ label {
+  color: var(--text-low);
+  opacity: .9;
+}
+
+.form-control:is(:hover,:focus), .form-select:is(:hover,:focus) {
+  border-color: var(--bs-form-control-focus-border-color);
+}
+
+/* Help/error text */
+.form-text { color: var(--text-low) !important; }
+.valid-feedback { color: var(--green-500) !important; }
+.invalid-feedback { color: var(--red-500) !important; }
+
+/* =====================================
+   LIST GROUP — para tu listado
+   ===================================== */
+
+.list-group {
+  background: transparent;
+  border-radius: var(--radius-md);
+}
+.list-group-item {
+  background: var(--surface-1);
+  color: var(--text-med);
+  border-color: var(--outline-1) !important;
+  transition: background-color var(--t-med) var(--easing), color var(--t-med) var(--easing), transform var(--t-fast) var(--easing);
+}
+.list-group-item-action:hover {
+  background-color: rgba(255,255,255,.04);
+  color: var(--text-high);
+}
+.list-group-item-action:active {
+  background-color: rgba(255,255,255,.06);
+}
+
+/* Acciones a la derecha (grupo de iconos) */
+.list-group .btn-group .icon-btn {
+  color: var(--text-low);
+}
+.list-group .btn-group .icon-btn:hover {
+  color: var(--text-high);
+}
+
+/* Truncado de nombres (2 líneas) */
+.text-truncate-2 {
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+/* =====================================
+   PAGINACIÓN
+   ===================================== */
+
+.pagination {
+  gap: .25rem;
+}
+.page-item .page-link {
+  border-radius: var(--radius-xs);
+  color: var(--text-med);
+  background: transparent;
+  border-color: var(--outline-1);
+  transition: background-color var(--t-med) var(--easing), color var(--t-med) var(--easing), border-color var(--t-med) var(--easing);
+}
+.page-item .page-link:hover {
+  color: var(--text-high);
+  background: rgba(255,255,255,.05);
+  border-color: var(--outline-2);
+}
+.page-item.active .page-link {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.page-item.disabled .page-link {
+  color: var(--text-low);
+  opacity: .6;
+}
+
+/* =====================================
+   DROPDOWN/MENÚ
+   ===================================== */
+
+.dropdown-menu {
+  background: var(--bs-dropdown-bg);
+  border-color: var(--bs-dropdown-border-color);
+}
+.dropdown-item {
+  color: var(--text-med);
+  transition: background-color var(--t-med) var(--easing), color var(--t-med) var(--easing);
+}
+.dropdown-item:hover, .dropdown-item:focus {
+  color: var(--text-high);
+  background: var(--bs-dropdown-link-hover-bg);
+}
+
+/* =====================================
+   MODALS
+   ===================================== */
+
+.modal-content {
+  background: var(--bs-modal-bg);
+  border-color: var(--bs-modal-border-color);
+}
+.modal-header, .modal-footer {
+  border-color: var(--outline-1);
+}
+
+/* =====================================
+   TOOLTIP/POPOVER
+   ===================================== */
+
+.tooltip .tooltip-inner {
+  background: var(--bs-tooltip-bg);
+  color: var(--bs-tooltip-color);
+  border: 1px solid rgba(255,255,255,.08);
+}
+.bs-tooltip-auto[data-popper-placement^=top] .tooltip-arrow::before,
+.bs-tooltip-top .tooltip-arrow::before {
+  border-top-color: var(--bs-tooltip-bg);
+}
+
+/* =====================================
+   TOASTS (incluye tu estilo “android”)
+   ===================================== */
+
+.toast, .toast.show {
+  background: rgba(20, 24, 31, .92);
+  color: var(--text-med);
+  border-color: rgba(255,255,255,.06);
+}
+.toast-header {
+  color: var(--text-low);
+  background: rgba(255,255,255,.04);
+  border-bottom-color: rgba(255,255,255,.08);
+}
+
+/* Tu toast-android con mejor contraste y elevación */
 .toast-android {
   position: fixed;
   bottom: 1rem;
   left: 50%;
   transform: translateX(-50%);
-  background: #323232;
+  background: rgba(24,28,36,.94);
   color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  animation: fadein 0.3s, fadeout 0.3s 1.7s;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: var(--shadow-color);
+  animation: fadein 0.18s var(--easing), fadeout 0.22s var(--easing) 1.9s forwards;
   pointer-events: none;
   z-index: 1055;
 }
-@keyframes fadein {
-  from { opacity: 0; }
-  to { opacity: 1; }
+
+/* =====================================
+   SCROLLBAR (WebKit) — discreta en dark
+   ===================================== */
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
 }
-@keyframes fadeout {
-  from { opacity: 1; }
-  to { opacity: 0; }
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(255,255,255,.14);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
+*::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255,255,255,.22);
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* =====================================
+   REDUCED MOTION
+   ===================================== */
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:.001ms!important; transition-duration:.001ms!important; scroll-behavior:auto!important; }
+}
+
+/* =====================================
+   UTILIDADES EXTRAS
+   ===================================== */
+
+/* Chips neutros (p.ej. tipo/categoría) */
+.badge-soft {
+  display:inline-flex; align-items:center; gap:.375rem;
+  background: var(--chip-bg);
+  color: var(--chip-text);
+  border: 1px solid var(--chip-border);
+  border-radius: 999px;
+  padding: .25rem .5rem;
+  line-height: 1;
+}
+
+/* Muted mejorado */
+.text-muted, .text-body-secondary { color: var(--text-low) !important; }
+
+/* Encabezados con contraste alto */
+h1,h2,h3,h4,h5,h6 { color: var(--text-high); }
+
+/* Contenedores de contenido (cards) */
+.card {
+  background: var(--surface-1);
+}
+.card-header {
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0));
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+/* Input-group oscuro */
+.input-group-text {
+  background: rgba(255,255,255,.04);
+  color: var(--text-low);
+  border-color: var(--outline-1);
+}
+
+/* Estado de selección (ej. list item activo) */
+.is-selected, .active.list-group-item {
+  background: rgba(61,116,255,.14) !important;
+  border-color: rgba(61,116,255,.4) !important;
+  color: #e9efff !important;
+}
+
+/* Pequeñas transiciones de elevar al hover para “cards” clicables */
+.card.hover-raise:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 36px rgba(0,0,0,.4), 0 2px 10px rgba(0,0,0,.28);
+  transition: transform var(--t-med) var(--easing), box-shadow var(--t-med) var(--easing);
+}
+
+/* Iconos dentro de inputs (si usas posición absoluta) */
+.input-with-icon {
+  position: relative;
+}
+.input-with-icon > i {
+  position: absolute; inset-block: 0; left: .65rem; display:flex; align-items:center;
+  color: var(--text-low); pointer-events: none;
+}
+.input-with-icon > .form-control {
+  padding-left: 2rem;
+}
+
+/* -----------------------------
+   Animaciones de toast (tuyas)
+   ----------------------------- */
+@keyframes fadein { from { opacity: 0; transform: translateX(-50%) translateY(6px);} to { opacity: 1; transform: translateX(-50%) translateY(0);} }
+@keyframes fadeout { from { opacity: 1; transform: translateX(-50%) translateY(0);} to { opacity: 0; transform: translateX(-50%) translateY(6px);} }
+
+/* Popup estrecho: comprime verticalmente pequeños gaps */
+@media (max-width: 480px){
+  .form-floating > label { font-size: .9rem; }
+  .form-control, .form-select { padding-top: 1.125rem; padding-bottom: .525rem; }
+}
+
+/* Pre legible en dark */
+pre { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+.form-control.pr-counter { padding-right: 3rem; }
+
+/* Oculto accesible (no display:none) para permitir autofill y evitar foco */
+.step-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+/* Fin src/index.css */

@@ -1,4 +1,4 @@
-import type { Prompt } from '../common/interfaces/prompt';
+import type { Prompt } from '../interfaces/prompt';
 
 export function buildCopyPrompt(data: Prompt | Omit<Prompt, | 'createdAt' | 'updatedAt' | 'userId'>): string {
   return `
@@ -18,19 +18,14 @@ You are expected to apply the most relevant principles, methodologies, and best 
 Your mission is as follows:
 ${data.prompt}
 
-Additional context:
-${data.notes || "No additional notes provided."}
-
 Metadata:
 - Tags: ${data.tags || "None"}
-- Identifier: ${data.id}
 
 Instructions:
 1. Interpret the mission according to the **${data.category}** domain and **${data.type}** role.
 2. Simulate a research process (as if searching the web) to gather the latest, most reliable, and relevant approaches, tools, and techniques.
 3. Critically evaluate and compare potential solutions, selecting the most optimal based on technical merit and relevance.
 4. Always provide your final response **in Spanish**, using precise and advanced technical language suitable for senior-level professionals.
-5. When code is required, produce it following Clean Code principles, solid architectural patterns, and aligned with the stated parameters.
-6. Integrate the initial challenge-oriented mindset (assumption analysis, counterarguments, alternative perspectives) throughout your reasoning process.
+5. Integrate the initial challenge-oriented mindset (assumption analysis, counterarguments, alternative perspectives) throughout your reasoning process.
 `.trim();
 }

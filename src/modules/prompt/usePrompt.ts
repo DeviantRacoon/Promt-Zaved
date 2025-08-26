@@ -1,6 +1,6 @@
 import { useCallback, useState, useEffect } from 'preact/hooks';
 import { getAuth } from 'firebase/auth';
-import { buildCopyPrompt } from '../../libs/buildCopyPrompt';
+import { buildCopyPrompt } from '../../common/libs/buildCopyPrompt';
 import { autofillChatGPT } from './autofill-chatgpt';
 
 import type { Prompt } from '../../common/interfaces/prompt';
@@ -9,6 +9,7 @@ import {
   doc,
   addDoc,
   updateDoc,
+  deleteDoc,
   serverTimestamp,
   query,
   where,
@@ -47,7 +48,7 @@ export function usePrompt() {
       const q = query(
         collection(db, "prompts"),
         where("userId", "==", userId),
-        where("isPublic", "==", true),
+        // where("isPublic", "==", true)
         orderBy("createdAt", "desc")
       );
 
@@ -133,6 +134,20 @@ export function usePrompt() {
     [],
   );
 
-  return { prompts, createPrompt, updatePrompt, getPrompt, copyPrompt, autofillPrompt };
+  const deletePrompt = useCallback(async (id: string) => {
+    try {
+      const promptRef = doc(db, "prompts", id);
+
+      await deleteDoc(promptRef);
+
+      showToast('Prompt eliminado');
+    } catch (error) {
+      showToast('Error al eliminar el prompt');
+      console.error("Error updating document: ", error);
+      return;
+    }
+  }, [prompts, setPrompts]);
+
+  return { prompts, createPrompt, updatePrompt, getPrompt, copyPrompt, autofillPrompt, deletePrompt };
 }
 
